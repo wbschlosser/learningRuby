@@ -1,3 +1,4 @@
+#made a variable called lamb to hold "little lamb"
 lamb = "little lamb"
 puts "Mary had a #{lamb}"
 puts "#{lamb} " * 2
@@ -5,6 +6,7 @@ puts "Mary had a #{lamb}"
 puts "And everywhere that Mary went"
 puts "." * 10
 
+#these variables spell cheeseburger
 end1 = "C"
 end2 = "h"
 end3 = "e"
