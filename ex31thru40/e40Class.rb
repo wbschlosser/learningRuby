@@ -5,7 +5,7 @@ class MyStuffTwo
 
 	attr_reader :tangerine
 	
-	def apple()
+	def methodThing()
 		puts "I AM CLASSY APPLES!"
 	end
 end

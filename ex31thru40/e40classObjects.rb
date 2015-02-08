@@ -9,11 +9,11 @@ puts mystuff['apple'] # gets aple from dict
 #1. A ruby file with functions and variables inside a module .. end block
 #2. Import the file, access functions or variables with the . operator
 puts "See e40myStuff.rb for the module to use"
-puts MyStuff.apple() #gets apple from the module
+puts MyStuffTwo.methodThing() #gets apple from the module
 
 puts "You can access variables in the module with the following"
 puts "MyStuff::TANGERINE"
-puts MyStuff::TANGERINE #same thing as line 12, just a variable
+puts MyStuffTwo::TANGERINE #same thing as line 12, just a variable
 
 puts"""
 1. Take a key = value style container.
