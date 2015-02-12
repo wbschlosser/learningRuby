@@ -102,12 +102,12 @@ class LaserWeaponArmory < Scene
 		code is 3 digits
 		"""
 		code = "#{rand(1..9)}#{rand(1..9)}#{rand(1..9)}"
-		print"[keypad]> "
+		print "[keypad]> "
 		guess = $stdin.gets.chomp
 		guesses = 0
 		while guess != code && guesses < 10
 			puts "BZZT!"
-			guesses++
+			guesses += 1
 			print "[keypad]> "
 			guess = $stdin.gets.chomp
 		end
@@ -133,25 +133,108 @@ end
 
 class TheBridge < Scene
 	def enter()
+		puts"""
+		You burst onto the bridge wit the bomb under your arm and surprise
+		5 gothons who are trying to take control of the ship. Each of them
+		has an even uglier clown costume than the last. The haven't pulled
+		their weapons out yet, as they see the active bomb under your arm
+		and don't want to set it off
+		"""
+		action = $stdin.gets.chomp
+
+		if action == "throw the bomb"
+			puts """
+			In a panic you throw the bomb at the group
+			and run for the door. As you turn around the gothons
+			shoot you in the back. As you lay dying you see them
+			frantically trying to disable it. You die knowing they will
+			probably blow up when it goes off
+			"""
+		return 'death'
+		elsif action == "slowly place the bomb"
+			puts"""
+			You point your blaster at the bomb and the gothons
+			put their hands up and start to sweat. You inch backward towards
+			the door, open it, and place the bomb on the floor. You jump
+			back through the door, punch the close button and blast the lock
+			so the gothons can't get out.
+			Now that the bomb is placed you run to the escape pod to get out
+			of this tin can
+			"""
+		return 'escape_pod'
+		else
+			puts "does not compute!"
+			return 'the_bridge'
+		end
 	end
 end
 
 class EscapePod < Scene
 	def enter()
+		puts"""
+		you rush through the ship deserately trying to make it to the
+		escape pods before the ship explodes. It seems like there are
+		hardly any gothons on the ship, so your run is clear of
+		interference. You get to the chamber with the pods and now need
+		to pick one to take. Some of them could have been damaged in the
+		attack, but you don't have time to look. There are 5 pods, which
+		one do you take?
+		"""
+		good_pod = rand(1..5)
+		print"[pod #]> "
+		guess = $stdin.gets.chomp.to_i
+
+		if guess != good_pod
+			puts"""
+			You jump into pod #{guess} and hit the eject button.
+			The pod escapes out into space then implodes as the
+			hull ruptures, crushing you.
+			"""
+			return 'death'
+		else
+			puts"""
+			You jump into pod #{guess} and hit the eject button.
+			The pod slides into space heading to the planet below.
+			As it plummits you look back to see your ship implode
+			then explode like a bright star, taking out the gothon ship
+			at the same time. You won!
+			"""
+			return 'finished'
+		end
 	end
 end
 
+class Finished < Scene
+	def enter()
+		puts "You Win! What a great game!"
+	end
+end
+
+#comes after all the scenes because they need to exist
+#before the hash is made
 class Map
+	@@scenes = {
+		'central_corridor' => CentralCorridor.new(),
+		'laser_weapon_armory' => LaserWeaponArmory.new(),
+		'the_bridge' => TheBridge.new(),
+		'escape_pod' => EscapePod.new(),
+		'death' => Death.new(),
+		'finished' => Finished.new(),
+	}
 	def initalize(start_scene)
+		@start_scene = start_scene
 	end
 
 	def next_scene(scene_name)
+		val = @@scenes[scene_name]
+		return val
 	end
 
 	def opening_scene()
+		return next_scene(@start_scene)
 	end
 end
 
-a_map = Map.new('central corridor')
+a_map = Map.new('central_corridor')
 a_game = Engine.new(a_map)
 a_game.play()

@@ -1,5 +1,8 @@
 #modules are like hashes
 require "./e40myStuff.rb"
+
+#class declaration NEEDS to have require "./classname.rb"
+require "./e40Class.rb"
 mystuff = {'apple' => "I AM APPLES!"}
 #this doesn't work the other way around
 puts mystuff['apple'] # gets aple from dict
@@ -9,11 +12,11 @@ puts mystuff['apple'] # gets aple from dict
 #1. A ruby file with functions and variables inside a module .. end block
 #2. Import the file, access functions or variables with the . operator
 puts "See e40myStuff.rb for the module to use"
-puts MyStuffTwo.methodThing() #gets apple from the module
+puts MyStuff.apple() #gets apple from the module
 
 puts "You can access variables in the module with the following"
 puts "MyStuff::TANGERINE"
-puts MyStuffTwo::TANGERINE #same thing as line 12, just a variable
+puts MyStuff::TANGERINE #same thing as line 12, just a variable
 
 puts"""
 1. Take a key = value style container.
@@ -40,7 +43,7 @@ equivalent of 'require'"
 
 puts "instantiate a class by calling the new function"
 thing = MyStuffTwo.new() #instantiates the class
-thing.apple
+thing.methodThing
 puts thing.tangerine
 
 puts"""

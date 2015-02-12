@@ -7,5 +7,6 @@ class MyStuffTwo
 	
 	def methodThing()
 		puts "I AM CLASSY APPLES!"
+		puts "I AM THE NIGHT! :3"
 	end
 end
